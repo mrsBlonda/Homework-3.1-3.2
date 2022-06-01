@@ -1,17 +1,23 @@
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
 public class MyCallable implements Callable {
-    int count;
+    static int count = 0;
+
+    public void incrementCount() {
+        for(int i = 1; i < 4; i++) {
+            System.out.println(Thread.currentThread().getName() + " Строка - " +  i);
+            count++;
+        }
+    }
 
 
     @Override
     public Integer call() throws Exception {
-
-        System.out.println("Работает - " + Thread.currentThread().getName());
-        for (count = 1; count <= 3; count++) {
-            System.out.println("Привет! Я строка номер " + count + " потока " + Thread.currentThread().getName());
-        }
+        incrementCount();
         return count;
+
+
     }
 
 

@@ -13,12 +13,13 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             list.add(myCallable);
         }
-        List<Future<Integer>> taskOfResult = threadPool.invokeAll(list);
-        for (Future<Integer> number : taskOfResult) {
 
-            int count = number.get();
-            System.out.println(count);
+        List<Future<Integer>> taskOfResult = threadPool.invokeAll(list);
+        for (int i = 0; i < taskOfResult.size(); i++) {
+            int count = taskOfResult.get(i).get();
+            System.out.println("Поток " + (i + 1) + " - " + count);
         }
+
 
         int taskOfResultAny = threadPool.invokeAny(list);
         System.out.println("Возврат успешной операции - " + taskOfResultAny);
